@@ -105,7 +105,21 @@ class BinaryTree:
       perform depth first search
       Calculate the maximum value held in the tree
     '''
-    pass
+    # check if tree is empty
+    if not self.root:
+      return False
+    current_node = self.node
+    maximum = self.head.data
+    if(self.head == None):
+      print("list is empty")
+    else:
+      while(True):
+        if (maximum < current_node.data):
+          maximum = current_node.data
+        current_node = current_node.next
+        if(current_node == self.head):
+          return False
+    
   def get_min(self):
     '''
       getMin() -> int:\n 
