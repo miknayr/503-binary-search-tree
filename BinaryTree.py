@@ -9,7 +9,7 @@ class Node:
 class BinaryTree:
   def __init__(self):
     self.root = None
-  def insert(self, data):
+  def insert(self, data): #done
     '''
       Insert(data: any) -> None:\n 
       creates a new Node from the data passed in and adds it to the tree
@@ -39,7 +39,7 @@ class BinaryTree:
           return
         else: current_node = current_node.right
       else: return # return if duplicate
-  def search(self, val):
+  def search(self, val):#done
     '''
       search(value: any) -> value or bool:\n 
       Performs depth first search
@@ -65,7 +65,7 @@ class BinaryTree:
       else:
         return current_node
     return False
-  def print(self, node=None):
+  def print(self, node=None): # done
     '''
       print(node=optional: Node) -> None:\n
       prints out all values recursively (in a breadth first search fashion)
@@ -83,14 +83,25 @@ class BinaryTree:
     if node.right:
       # recurse...
       self.print(node.right)
-  def size(self, node=None):
+  def size(self, node=None): #done?
     '''
       size(node=optional: Node) -> int:\n 
       performs breadth first search
       Calculate the number of nodes in the tree, starting from the given node
       If no node is provided, we can use the root as a sensible default
     '''
-    pass
+    if not node:
+      node = self.root
+    count = 0
+    def re_size(node):
+      nonlocal count
+      if node:
+        count += 1
+        re_size(node.left)
+        re_size(node.right)
+    re_size(node)
+    return count
+    
   def height(self, node=None):
     '''
       height(node=optional: Node) -> int:\n 
@@ -98,8 +109,21 @@ class BinaryTree:
       Calculate the maximum amount of nodes in any one path from the given node
       If not given a specific node, default to using the root node
     '''
-    pass
-  def get_max(self):
+    if not node:
+      node = self.root
+    max_height = 0
+    def re_height(node, height = 1):
+      nonlocal max_height
+      if node:
+        if height > max_height:
+          max_height = height
+        re_height(node.left, height + 1)
+        re_height(node.right, height + 1)
+    re_height(node)
+    return max_height
+
+
+  def get_max(self): #done
     '''
       getMax() -> int:\n 
       perform depth first search
@@ -113,7 +137,7 @@ class BinaryTree:
       current_node = current_node.right
     return current_node.data
     
-  def get_min(self):
+  def get_min(self): #done
     '''
       getMin() -> int:\n 
       perform depth first search
